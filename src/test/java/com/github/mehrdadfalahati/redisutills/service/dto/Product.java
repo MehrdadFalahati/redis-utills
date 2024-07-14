@@ -23,8 +23,12 @@ public class Product {
     @Builder.Default
     private Instant createAt = Instant.now();
 
-    public static TypeReference<List<Product>> getTypeReference() {
+    public static TypeReference<List<Product>> getTypeReferences() {
         return new TypeReference<List<Product>>() {
         };
+    }
+
+    public static TypeReference<Product> getTypeReference() {
+        return new TypeReference<Product>() {};
     }
 }
