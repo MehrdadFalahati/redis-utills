@@ -1,9 +1,9 @@
 package com.github.mehrdadfalahati.redisutills.service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.github.mehrdadfalahati.redisutills.service.dto.Product;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class RedisServiceTest extends AbstractRedisTestContainer {
 
     @Autowired
+    @Qualifier("redisService")
     private RedisService<String, List<Product>> redisListService;
 
     @Autowired
@@ -47,11 +48,11 @@ class RedisServiceTest extends AbstractRedisTestContainer {
 
     @Test
     void whenAddingProduct_thenCallDeleteByKey_expectedGetNone() {
-        redisService.setIfAbsent(new RedisDto<>("products", 5, TimeUnit.SECONDS), milk);
+        redisService.setIfAbsent(new RedisDto<>("product", 5, TimeUnit.SECONDS), milk);
 
-        redisService.delete("products");
-        Product products = redisService.get("products", Product.getTypeReference());
-        assertNull(products);
+        redisService.delete("product");
+        Product product = redisService.get("product", Product.getTypeReference());
+        assertNull(product);
     }
 
 
