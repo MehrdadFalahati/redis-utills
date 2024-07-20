@@ -1,6 +1,7 @@
 package com.github.mehrdadfalahati.redisutills.service;
 
 import com.github.mehrdadfalahati.redisutills.RedisTestConfiguration;
+import com.github.mehrdadfalahati.redisutills.service.dto.Product;
 import com.redis.testcontainers.RedisContainer;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
@@ -33,6 +34,16 @@ public abstract class AbstractRedisTestContainer {
         registry.add("spring.data.redis.port", () -> REDIS_CONTAINER.getMappedPort(6379)
                 .toString());
     }
+
+    protected final Product milk = Product.builder()
+            .name("Milk")
+            .price(10.2)
+            .build();
+
+    protected final Product meat = Product.builder()
+            .name("Meat")
+            .price(100.5)
+            .build();
 
     @Test
     void givenRedisContainerConfiguredWithDynamicProperties_whenCheckingRunningStatus_thenStatusIsRunning() {

@@ -18,16 +18,6 @@ public class RedisHashServiceTest extends AbstractRedisTestContainer  {
     @Qualifier("redisHashService")
     private RedisService<String, List<Product>> redisHashListService;
 
-    private final Product milk = Product.builder()
-            .name("Milk")
-            .price(10.2)
-            .build();
-
-    private final Product meat = Product.builder()
-            .name("Meat")
-            .price(100.5)
-            .build();
-
     @Test
     void whenAddingListOfProducts_expectedGetProductsWithKey() {
         redisHashListService.setIfAbsent(new RedisDto<>("products", 5, TimeUnit.SECONDS), List.of(milk, meat));

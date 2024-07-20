@@ -19,16 +19,6 @@ class RedisServiceTest extends AbstractRedisTestContainer {
     @Autowired
     private RedisService<String, Product> redisService;
 
-    private final Product milk = Product.builder()
-            .name("Milk")
-            .price(10.2)
-            .build();
-
-    private final Product meat = Product.builder()
-            .name("Meat")
-            .price(100.5)
-            .build();
-
     @Test
     void whenAddingListOfProducts_expectedGetProductsWithKey() {
         redisListService.setIfAbsent(new RedisDto<>("products", 5, TimeUnit.SECONDS), List.of(milk, meat));
